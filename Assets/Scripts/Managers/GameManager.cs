@@ -5,41 +5,20 @@ public class GameManager : MonoBehaviour {
     public GameObject[] platforms;
     private readonly int instancesPerPlatformCount = 15;
     private GameObject killZone;
+    private PlatformGenerator platformGenerator;
 
     private void Awake()
     {
-        CreatePlatforms();
+        platformGenerator = new PlatformGenerator(platforms);
+        platformGenerator.CreatePlatforms();
+
         killZone = GameObject.FindWithTag("Kill Zone");
     }
 
-    private void CreatePlatforms()
+    public void ActivateNextPlatform()
     {
-        Vector3 previousPlatformPosition = Vector3.zero;
-        Vector3 playerPosition = player.transform.position;
-
-        /*
-         * Creating instances for each type of platform
-         *********************************************/
-        foreach (GameObject platform in platforms)
-        {
-            PoolManager.Instance.CreatePool(platform, instancesPerPlatformCount);
-        }
-
-        for (int i = 0; i < instancesPerPlatformCount; i++)
-        {
-            //activating each of the platforms retrieved from pool
-            CreatePlatform();
-        }
-    }
-
-    public void CreatePlatform()
-    {
-        //picking a random platform from the pool
-        Platform platform = platforms[Random.Range(0, (platforms.Length - 1))].GetComponent<Platform>();
-
-        //activating the platform object
-        PoolManager.Instance.ReuseObject(platform.gameObject.GetInstanceID());
-    }
+        platformGenerator.ActivateNextPlatform();
+    } 
 
     private void Update()
     {

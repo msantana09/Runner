@@ -11,7 +11,7 @@ public class Platform : PoolObject
              * and create a new one ahead of player
              **/
             OnDestroy();
-            FindObjectOfType<GameManager>().CreatePlatform();
+            FindObjectOfType<GameManager>().ActivateNextPlatform();
         }
     }
 
