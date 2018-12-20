@@ -4,10 +4,12 @@ public class GameManager : MonoBehaviour {
     public Player player;
     public GameObject[] platforms;
     private readonly int instancesPerPlatformCount = 15;
+    private GameObject killZone;
 
     private void Awake()
     {
         CreatePlatforms();
+        killZone = GameObject.FindWithTag("Kill Zone");
     }
 
     private void CreatePlatforms()
@@ -35,7 +37,13 @@ public class GameManager : MonoBehaviour {
         //picking a random platform from the pool
         Platform platform = platforms[Random.Range(0, (platforms.Length - 1))].GetComponent<Platform>();
 
-        //activating the object
+        //activating the platform object
         PoolManager.Instance.ReuseObject(platform.gameObject.GetInstanceID());
     }
+
+    private void Update()
+    {
+        killZone.transform.position = new Vector3(player.transform.position.x, killZone.transform.position.y, 0);
+    }
+
 }
