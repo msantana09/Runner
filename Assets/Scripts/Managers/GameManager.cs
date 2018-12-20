@@ -3,14 +3,22 @@
 public class GameManager : MonoBehaviour {
     public Player player;
     public GameObject[] platforms;
-    private readonly int instancesPerPlatformCount = 15;
+    public GameObject[] stars;
+
+    public int starDensity = 100;
+
     private GameObject killZone;
     private PlatformGenerator platformGenerator;
+    private StarGenerator starGenerator;
 
     private void Awake()
     {
         platformGenerator = new PlatformGenerator(platforms);
         platformGenerator.CreatePlatforms();
+
+        starGenerator = new StarGenerator(stars,player.gameObject);
+        starGenerator.CreateStars(starDensity);
+
 
         killZone = GameObject.FindWithTag("Kill Zone");
     }
