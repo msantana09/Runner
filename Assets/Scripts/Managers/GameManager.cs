@@ -2,13 +2,16 @@
 
 public class GameManager : MonoBehaviour {
     public Player player;
+    public GameObject[] clouds;
     public GameObject[] platforms;
     public GameObject[] stars;
     public int starDensity = 100;
+    public int cloudDensity = 20;
 
     private GameObject killZone;
     private PlatformGenerator platformGenerator;
     private StarGenerator starGenerator;
+    private CloudGenerator cloudGenerator;
     private bool gameStarted = false;
     public GameObject readyScreen;
 
@@ -19,6 +22,9 @@ public class GameManager : MonoBehaviour {
 
         starGenerator = new StarGenerator(stars,player.gameObject);
         starGenerator.CreateStars(starDensity);
+
+        cloudGenerator = new CloudGenerator(clouds, player.gameObject);
+        cloudGenerator.CreateClouds(cloudDensity);
 
 
         killZone = GameObject.FindWithTag("Kill Zone");
@@ -44,5 +50,10 @@ public class GameManager : MonoBehaviour {
             readyScreen.SetActive(false);
             gameStarted = true;
         }
+    }
+
+    public bool hasGameStarted()
+    {
+        return gameStarted;
     }
 }

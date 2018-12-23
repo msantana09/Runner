@@ -376,6 +376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1763086511}
+  clouds:
+  - {fileID: 1830677209514304, guid: 5bae14ed86a8b2446bfd427ea444c358, type: 2}
+  - {fileID: 1919478909848882, guid: 0cdea98597013404cb7ec53ef6e63cb6, type: 2}
+  - {fileID: 1768232859358268, guid: b3c127ed5fe226d47bd395d7b507f148, type: 2}
   platforms:
   - {fileID: 100004, guid: 57977547c59abb546bbb1501e3c417db, type: 2}
   - {fileID: 100010, guid: 674c23718320e9d498cdad2a5bcd576a, type: 2}
@@ -383,6 +387,7 @@ MonoBehaviour:
   stars:
   - {fileID: 1563932146734442, guid: 05d64b9a7aa7b564eaf1c195128102dc, type: 2}
   starDensity: 200
+  cloudDensity: 20
   readyScreen: {fileID: 1222228855}
 --- !u!1 &1166057096
 GameObject:
