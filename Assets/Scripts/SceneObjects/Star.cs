@@ -10,16 +10,15 @@ public class Star : PoolObject
     private float leftBorder;
     private float rightBorder;
     private float xPosition = 0;
-    private float rotation;
-
 
     private void MakeUnique()
     {
-        rotation = Random.Range(-20f, 20f);
-        
-        float scale = Random.Range(0.005f, 0.01f);
-        transform.localScale = new Vector3(scale, scale, scale);
+        RandomizeScale();
+        transform.position = new Vector3(RandomizeXAxis(), RandomizeYAxis(), Random.Range(80.0f, 99.0f));
+    }
 
+    private float RandomizeYAxis()
+    {
         float maxHeight = (Camera.main.orthographicSize * 1.5f);
         float y = Random.Range(0f, maxHeight);
         float randomY = Random.Range(0f, 1f);
@@ -31,8 +30,12 @@ public class Star : PoolObject
         {
             y = Random.Range(3f, maxHeight / 3);
         }
+        return y;
+    }
 
 
+    private float RandomizeXAxis()
+    {
         if (xPosition == 0)
         {
             xPosition = Random.Range(leftBorder, (rightBorder - leftBorder) * 2);
@@ -41,9 +44,13 @@ public class Star : PoolObject
         {
             xPosition = Random.Range(rightBorder, rightBorder + (rightBorder - leftBorder));
         }
+        return xPosition;
+    }
 
-
-        transform.position = new Vector3(xPosition, y, Random.Range(80.0f, 99.0f));
+    private void RandomizeScale()
+    {
+        float scale = Random.Range(0.005f, 0.01f);
+        transform.localScale = new Vector3(scale, scale, scale);
     }
 
 
@@ -59,9 +66,7 @@ public class Star : PoolObject
             else
             {
                 spriteRenderer.color = defaultColor;
-
             }
-            transform.Rotate(Vector3.right * Time.deltaTime * rotation);
         }
     }
 
